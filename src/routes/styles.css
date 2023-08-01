@@ -1,0 +1,21 @@
+:root {
+	--dark-gradiant: linear-gradient(180deg, #2C5364 0%, #203A43 50.52%, #0F2027 100%);
+	--accent-color: linear-gradient(97deg, #00C9FF 0%, #92FE9D 100%);
+	--border-color: #B9B9BB;
+	--unemphasized: #5B5B5C;
+}
+
+@font-face {
+	font-family: "saolDisplay";
+	src: url(../lib/fonts/SaolDisplay-LightItalic.ttf);
+}
+
+@font-face {
+	font-family: "switzer";
+	src: url(../lib/fonts/Switzer-Variable.ttf);
+}
+
+html, body{
+	margin: 0;
+	padding: 0;
+}
