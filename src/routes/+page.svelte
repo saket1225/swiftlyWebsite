@@ -2,7 +2,7 @@
 </script>
 
 <svelte:head>
-	<title>Home</title>
+	<title>Swiftly-Do what you are good at!</title>
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 

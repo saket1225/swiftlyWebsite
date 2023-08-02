@@ -1,12 +1,11 @@
 <script>
+    import { currentOs } from './store.js';
+    import { onMount } from 'svelte';
     import logo from '$lib/images/swiftly-logo.png';
     import apple from '$lib/images/appleActive.png'
     import linux from '$lib/images/linuxActive.png'
     import windows from '$lib/images/windowsActive.png'
     import heroBg from '$lib/images/heroBgNoise.png'
-    import {onMount} from 'svelte';
-
-    let currentOs = "mac";
 
     onMount(() => {
         function getOperatingSystem() {
@@ -34,11 +33,11 @@
 
         console.log(getOperatingSystem());
 
-        currentOs = getOperatingSystem();
+        currentOs.set(getOperatingSystem());
     })
 
     function setOs(os) {
-        currentOs = os;
+        currentOs.set(os);
     }
 </script>
 
@@ -50,9 +49,9 @@
         </a>
     </div>
     <div class="nav-right">
-        <img class="platforms apple {currentOs === 'mac' ? 'active' : ''}" src={apple} alt="Apple platforms" on:click={() => setOs('mac')}>
-        <img class="platforms linux {currentOs === 'linux' ? 'active' : ''}" src={linux} alt="Linux platforms" on:click={() => setOs('linux')}>
-        <img class="platforms windows {currentOs === 'windows' ? 'active' : ''}" src={windows} alt="Windows platforms" on:click={() => setOs('windows')}>
+        <img class="platforms apple {$currentOs === 'mac' ? 'active' : ''}" src={apple} alt="Apple platforms" on:click={() => setOs('mac')}>
+        <img class="platforms linux {$currentOs === 'linux' ? 'active' : ''}" src={linux} alt="Linux platforms" on:click={() => setOs('linux')}>
+        <img class="platforms windows {$currentOs === 'windows' ? 'active' : ''}" src={windows} alt="Windows platforms" on:click={() => setOs('windows')}>
     </div>
 </header>
 
@@ -63,8 +62,8 @@
 		position: absolute;
 		inset: 0;
 		z-index: -100;
-		width: 100vw;
-		height: 100vh;
+		width: 100%;
+		height: 100%;
 	}
 
 	header {
