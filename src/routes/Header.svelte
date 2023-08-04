@@ -135,4 +135,23 @@
 		opacity: 1;
 	}
 
+	@media only screen and (max-width: 450px){
+		.nav-left a{
+			margin-left: -0.5rem;
+		}
+		
+		.nav-right{
+			margin-right: 1.5rem;
+		}
+	}
+	
+	@media only screen and (max-width: 315px){
+		.logoText{
+			display: none;
+		}
+
+		.nav-right{
+			gap: 1rem;
+		}
+	}
 </style>

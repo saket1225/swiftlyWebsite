@@ -160,7 +160,7 @@
 
     .tabs .active{
         color: #000;
-        font-weight: 400;
+        font-weight: 500;
         border-bottom: 1px solid #fff;
     }
 
@@ -218,5 +218,94 @@
     
     .footer a:hover{
         opacity: 0.7;
+    }
+
+    @media only screen and (max-width: 1200px){
+    .cmdMac{
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 992px){
+    .cmdMac{
+        width: 90%;
+    }
+    .content h2{
+        font-size: 12px;
+    }
+    .footer h2, a{
+        font-size: 0.8rem;
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .cmdMac{
+        width: 90%;
+    }
+    .tab{
+        padding: 8px 10px !important;
+        font-size: 0.9rem; /* Increase font size */
+    }
+    .content h2{
+        font-size: 12px; /* Increase font size */
+    }
+    .footer h2, a{
+        font-size: 0.9rem; /* Increase font size */
+    }
+}
+
+    @media only screen and (max-width: 576px){
+        .cmdMac{
+            width: 90%;
+        }
+        .emptyArea{
+            width: 3rem;
+        }
+
+        .emptyAreaBetween{
+            width: 0rem;
+        }
+
+        .content h2 .highlight{
+            padding: 3px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .tabs{
+            width: 100%;
+            display: flex;
+            overflow-x: auto; /* Enable horizontal scrolling */
+            scrollbar-width: none; /* Hide scrollbar for Firefox */
+            -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+            flex-grow: 1; /* Allow the tabs to take up the remaining space */
+        }
+
+        .tabs::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+        }
+
+        .tab{
+            flex: 0 0 auto; /* Prevent flex items from shrinking */
+            /* Increase the width of the tab as needed */
+        }
+
+        .controls{
+            position: sticky;
+            right: 0; /* Stick to the right */
+        }
+
+        .content h2{
+            font-size: 12px; /* Further increase font size */
+        }
+
+        .footer{
+            flex-direction: column;
+            padding-bottom: 1rem;
+        }
+
+        .footer h2, a{
+            font-size: 1rem; /* Further increase font size */
+        }
     }
 </style>

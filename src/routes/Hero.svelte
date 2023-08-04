@@ -21,7 +21,7 @@
 			<div class="underline"></div>
 		</div>
 	</div>
-	<h2 class="goodAt">Do what you’re good at; writing code. Swiftly handles the rest <img class="winky" src={winky} alt="winking emoji"></h2>
+	<h2 class="goodAt">Do what you’re good at; writing code. <span>Swiftly handles the rest <img class="winky" src={winky} alt="winking emoji"></span></h2>
 
 	<img src={magic} alt="experience the magic" class="magic">
 
@@ -136,5 +136,119 @@
 		position: absolute;
 		left: 46.5%;
 		transform: translateX(-50%);
-	}	
+	}
+
+	@media only screen and (max-width: 750px){
+		.work, .swiftly{
+			font-size: 5.5rem;
+		}
+
+		.underline{
+			width: 250px;
+			margin-left: 0.5rem;
+			height: 15px;
+		}
+
+		.headingText{
+			margin-top: 1rem;
+			gap: 1.5rem;
+		}
+
+		.goodAt{
+			margin-top: 1rem;
+			font-size: 1.2rem;
+			padding: 0 1rem;
+		}
+
+		.magic{
+			left: 43%;
+		}
+	}
+	
+	@media only screen and (max-width: 550px){
+		.work, .swiftly{
+			font-size: 5rem;
+		}
+
+		.underline{
+			width: 220px;
+			margin-left: 0.5rem;
+			height: 15px;
+		}
+
+		.headingText{
+			margin-top: 1rem;
+			gap: 1.3rem;
+		}
+
+		.goodAt{
+			margin-top: 1rem;
+			font-size: 1.1rem;
+			padding: 0 1rem;
+		}
+
+		.magic{
+			left: 40%;
+		}
+	}
+	
+	@media only screen and (max-width: 425px){
+		.work, .swiftly{
+			font-size: 4rem;
+		}
+
+		.underline{
+			width: 170px;
+			margin-left: 0.7rem;
+			height: 10px;
+			bottom: 12px;
+		}
+
+		.headingText{
+			margin-top: 1rem;
+			gap: 0.9rem;
+		}
+
+		.goodAt{
+			margin-top: 1.5rem;
+			font-size: 1.1rem;
+			padding: 0 1rem;
+		}
+
+		.goodAt span{
+			display: inline-block;
+		}
+
+		.magic{
+			left: 36%;
+		}
+	}
+
+	@media only screen and (max-width: 375px){
+		.work, .swiftly{
+			font-size: 3.5rem;
+		}
+
+		.underline{
+			width: 150px;
+			margin-left: 0.7rem;
+			height: 10px;
+			bottom: 12px;
+		}
+
+		.headingText{
+			margin-top: 1rem;
+			gap: 0.9rem;
+		}
+
+		.goodAt{
+			margin-top: 1.5rem;
+			font-size: 1.1rem;
+			padding: 0 1rem;
+		}
+
+		.magic{
+			left: 36%;
+		}
+	}
 </style>
