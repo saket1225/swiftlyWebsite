@@ -1,5 +1,12 @@
 <script>
-    let activeTab = 'init'; // Default active tab
+    export let tabs = []; // here we define the tabs as a prop
+
+    let activeTab; // Default active tab
+
+    // Reactive statement to update activeTab when tabs changes
+    $: if (tabs.length > 0) {
+        activeTab = tabs[0].label;
+    }
 
     function switchTab(tab) {
         activeTab = tab;
@@ -14,72 +21,21 @@
             <div class="control green"></div>
         </div>
         <div class="tabs">
-            <div class="tab" class:active={activeTab === 'init'} on:click={() => switchTab('init')}>init</div>
-            <div class="tab" class:active={activeTab === 'start'} on:click={() => switchTab('start')}>start</div>
-            <div class="tab" class:active={activeTab === 'makeapp'} on:click={() => switchTab('makeapp')}>makeapp</div>
-            <div class="tab" class:active={activeTab === 'install'} on:click={() => switchTab('install')}>install</div>
-            <div class="tab" class:active={activeTab === 'run'} on:click={() => switchTab('run')}>run</div>
+            {#each tabs as tab}
+                <div class="tab" class:active={activeTab === tab.label} on:click={() => switchTab(tab.label)}>{tab.label}</div>
+            {/each}
         </div>
         <div class="emptyArea"></div>
     </div>
 
     <div class="content">
-        {#if activeTab === 'init'}
-            <h2>
-                shubhastro@MBP no-curlybraces % <span class="highlight">source swiftly init &ltgit-repo@url || name&gt <br></span>
-                <span class="green">✓</span> Checked swiftly <br>
-                <span class="green">✓</span> Git repository cloned <br>
-                <span class="green">✓</span> Project 'lean' ready <br>
-                <span class="green">✓</span> Requirements installed <br>
-                <span class="green">✓</span> All checks completed swiftly <br>
-                ✨ Project 'lean' initiated successfully :) <br>
-                <span class="emphasize">(venvlean) shubhastro@MBP lean %</span>
-            </h2>
-        {:else if activeTab === 'start'}
-            <h2>
-                shubhastro@MBP no-curlybraces % <span class="highlight">source swiftly start<br></span>
-                <span class="green">✓</span> Checked swiftly <br>
-                <span class="green">✓</span> Git repository cloned <br>
-                <span class="green">✓</span> Project 'lean' ready <br>
-                <span class="green">✓</span> Requirements installed <br>
-                <span class="green">✓</span> All checks completed swiftly <br>
-                ✨ Project 'lean' initiated successfully :) <br>
-                <span class="emphasize">(venvlean) shubhastro@MBP lean %</span>
-            </h2>
-        {:else if activeTab === 'makeapp'}
-            <h2>
-                shubhastro@MBP no-curlybraces % <span class="highlight">source swiftly makeapp <br></span>
-                <span class="green">✓</span> Checked swiftly <br>
-                <span class="green">✓</span> Git repository cloned <br>
-                <span class="green">✓</span> Project 'lean' ready <br>
-                <span class="green">✓</span> Requirements installed <br>
-                <span class="green">✓</span> All checks completed swiftly <br>
-                ✨ Project 'lean' initiated successfully :) <br>
-                <span class="emphasize">(venvlean) shubhastro@MBP lean %</span>
-            </h2>
-        {:else if activeTab === 'install'}
-            <h2>
-                shubhastro@MBP no-curlybraces % <span class="highlight">source swiftly install &lspackage name&gt <br></span>
-                <span class="green">✓</span> Checked swiftly <br>
-                <span class="green">✓</span> Git repository cloned <br>
-                <span class="green">✓</span> Project 'lean' ready <br>
-                <span class="green">✓</span> Requirements installed <br>
-                <span class="green">✓</span> All checks completed swiftly <br>
-                ✨ Project 'lean' initiated successfully :) <br>
-                <span class="emphasize">(venvlean) shubhastro@MBP lean %</span>
-            </h2>
-        {:else if activeTab === 'run'}
-            <h2>
-                shubhastro@MBP no-curlybraces % <span class="highlight">swiftly run <br></span>
-                <span class="green">✓</span> Checked swiftly <br>
-                <span class="green">✓</span> Git repository cloned <br>
-                <span class="green">✓</span> Project 'lean' ready <br>
-                <span class="green">✓</span> Requirements installed <br>
-                <span class="green">✓</span> All checks completed swiftly <br>
-                ✨ Project 'lean' initiated successfully :) <br>
-                <span class="emphasize">(venvlean) shubhastro@MBP lean %</span>
-            </h2>
-        {/if}
+        {#each tabs as tab (tab.label)}
+            {#if activeTab === tab.label}
+                <h2>
+                    {@html tab.content}
+                </h2>
+            {/if}
+        {/each}
     </div>
 
     <div class="footer">
@@ -140,6 +96,7 @@
     }
 
     .tabs .tab{
+        white-space: nowrap;
         padding: 8px 15px;
         border-right: 0.5px solid #B9B9BB;
         font-family: 'Switzer';
@@ -167,30 +124,6 @@
     .emptyArea{
         width: 100%;
         border-bottom: 1px solid #B9B9BB;
-    }
-
-    .content h2{
-        font-family: 'Source Code Pro';
-        font-size: 14px;
-        padding: 5px 15px;
-        font-weight: 400;
-        color: #5B5B5C;
-    }
-
-    .content h2 .highlight{
-        background: linear-gradient(97deg, #C0F2FF 0%, #E3FEE7 100%);
-        color: #000;
-        font-weight: 500;
-        padding: 0.3rem 0.5rem;
-    }
-
-    .content h2 .emphasize{
-        color: #000;
-        font-weight: 500;
-    }
-    
-    .content h2 .green{
-        color: #57BF38;
     }
 
     .footer{
@@ -230,9 +163,7 @@
     .cmdMac{
         width: 90%;
     }
-    .content h2{
-        font-size: 12px;
-    }
+    
     .footer h2, a{
         font-size: 0.8rem;
     }
@@ -246,9 +177,7 @@
         padding: 8px 10px !important;
         font-size: 0.9rem; /* Increase font size */
     }
-    .content h2{
-        font-size: 12px; /* Increase font size */
-    }
+    
     .footer h2, a{
         font-size: 0.9rem; /* Increase font size */
     }
@@ -266,11 +195,7 @@
             width: 0rem;
         }
 
-        .content h2 .highlight{
-            padding: 3px;
-            display: inline-block;
-            width: 100%;
-        }
+        /* content styling in style.css */
 
         .tabs{
             width: 100%;
@@ -293,10 +218,6 @@
         .controls{
             position: sticky;
             right: 0; /* Stick to the right */
-        }
-
-        .content h2{
-            font-size: 12px; /* Further increase font size */
         }
 
         .footer{

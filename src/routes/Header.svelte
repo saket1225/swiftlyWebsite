@@ -60,6 +60,7 @@
 <style>
 	.heroBg{
 		position: absolute;
+		object-fit: fill;
 		inset: 0;
 		z-index: -100;
 		width: 100%;
@@ -68,12 +69,13 @@
 
 	header {
 		position: sticky;
+		z-index: 5000;
 		inset: 0;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		background-color: rgba(255, 255, 255, 0.3);
-		backdrop-filter: blur(4px);
+		background-color: rgba(255, 255, 255, 0.6);
+		backdrop-filter: blur(10px);
 		height: 4rem;
 		border-bottom: 1px solid #B9B9BB;
 	}

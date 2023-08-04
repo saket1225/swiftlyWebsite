@@ -2,23 +2,29 @@
     import min from '$lib/images/minLin.svg';
     import max from '$lib/images/maxLin.svg';
     import close from '$lib/images/closeLin.svg';
+    
+    export let tabs = []; // here we define the tabs as a prop
 
-    let activeTab = 'init'; // Default active tab
+    let activeTab; // Default active tab
+
+    // Reactive statement to update activeTab when tabs changes
+    $: if (tabs.length > 0) {
+        activeTab = tabs[0].label;
+    }
 
     function switchTab(tab) {
         activeTab = tab;
     }
 </script>
 
+
 <div class="cmdWindows">
 	<div class="navWindows">
         <div class="emptyArea"></div>
         <div class="tabs">
-            <div class="tab" class:active={activeTab === 'init'} on:click={() => switchTab('init')}>init</div>
-            <div class="tab" class:active={activeTab === 'start'} on:click={() => switchTab('start')}>start</div>
-            <div class="tab" class:active={activeTab === 'makeapp'} on:click={() => switchTab('makeapp')}>makeapp</div>
-            <div class="tab" class:active={activeTab === 'install'} on:click={() => switchTab('install')}>install</div>
-            <div class="tab" class:active={activeTab === 'run'} on:click={() => switchTab('run')}>run</div>
+            {#each tabs as tab}
+                <div class="tab" class:active={activeTab === tab.label} on:click={() => switchTab(tab.label)}>{tab.label}</div>
+            {/each}
         </div>
         <div class="emptyAreaBetween"></div>
         <div class="controls">
@@ -35,62 +41,13 @@
     </div>
 
     <div class="content">
-        {#if activeTab === 'init'}
-            <h2>
-                shubhastro@MBP no-curlybraces % <span class="highlight">source swiftly init &ltgit-repo@url || name&gt <br></span>
-                <span class="green">✓</span> Checked swiftly <br>
-                <span class="green">✓</span> Git repository cloned <br>
-                <span class="green">✓</span> Project 'lean' ready <br>
-                <span class="green">✓</span> Requirements installed <br>
-                <span class="green">✓</span> All checks completed swiftly <br>
-                ✨ Project 'lean' initiated successfully :) <br>
-                <span class="emphasize">(venvlean) shubhastro@MBP lean %</span>
-            </h2>
-        {:else if activeTab === 'start'}
-            <h2>
-                shubhastro@MBP no-curlybraces % <span class="highlight">source swiftly start<br></span>
-                <span class="green">✓</span> Checked swiftly <br>
-                <span class="green">✓</span> Git repository cloned <br>
-                <span class="green">✓</span> Project 'lean' ready <br>
-                <span class="green">✓</span> Requirements installed <br>
-                <span class="green">✓</span> All checks completed swiftly <br>
-                ✨ Project 'lean' initiated successfully :) <br>
-                <span class="emphasize">(venvlean) shubhastro@MBP lean %</span>
-            </h2>
-        {:else if activeTab === 'makeapp'}
-            <h2>
-                shubhastro@MBP no-curlybraces % <span class="highlight">source swiftly makeapp <br></span>
-                <span class="green">✓</span> Checked swiftly <br>
-                <span class="green">✓</span> Git repository cloned <br>
-                <span class="green">✓</span> Project 'lean' ready <br>
-                <span class="green">✓</span> Requirements installed <br>
-                <span class="green">✓</span> All checks completed swiftly <br>
-                ✨ Project 'lean' initiated successfully :) <br>
-                <span class="emphasize">(venvlean) shubhastro@MBP lean %</span>
-            </h2>
-        {:else if activeTab === 'install'}
-            <h2>
-                shubhastro@MBP no-curlybraces % <span class="highlight">source swiftly install &lspackage name&gt <br></span>
-                <span class="green">✓</span> Checked swiftly <br>
-                <span class="green">✓</span> Git repository cloned <br>
-                <span class="green">✓</span> Project 'lean' ready <br>
-                <span class="green">✓</span> Requirements installed <br>
-                <span class="green">✓</span> All checks completed swiftly <br>
-                ✨ Project 'lean' initiated successfully :) <br>
-                <span class="emphasize">(venvlean) shubhastro@MBP lean %</span>
-            </h2>
-        {:else if activeTab === 'run'}
-            <h2>
-                shubhastro@MBP no-curlybraces % <span class="highlight">swiftly run <br></span>
-                <span class="green">✓</span> Checked swiftly <br>
-                <span class="green">✓</span> Git repository cloned <br>
-                <span class="green">✓</span> Project 'lean' ready <br>
-                <span class="green">✓</span> Requirements installed <br>
-                <span class="green">✓</span> All checks completed swiftly <br>
-                ✨ Project 'lean' initiated successfully :) <br>
-                <span class="emphasize">(venvlean) shubhastro@MBP lean %</span>
-            </h2>
-        {/if}
+        {#each tabs as tab (tab.label)}
+            {#if activeTab === tab.label}
+                <h2>
+                    {@html tab.content}
+                </h2>
+            {/if}
+        {/each}
     </div>
 
     <div class="footer">
@@ -98,6 +55,7 @@
         <a href="https://youtube.com/" target="_blank">Read Documentation</a>
     </div>
 </div>
+
 <style>	
     @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200;300;400;500;600;700;800;900&family=Source+Sans+3:wght@200;300;400;500;600;700;800;900&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@200;300;400;500;600;700;800;900&display=swap');
@@ -133,23 +91,12 @@
         transform: scale(1.1);
     }
 
-    .controls .red{
-        background: #ED6A5F;
-    }
-    
-    .controls .yellow{
-        background: #F5BF4F;
-    }
-    
-    .controls .green{
-        background: #61C554;
-    }
-
     .tabs{
         display: flex;
     }
 
     .tabs .tab{
+        white-space: nowrap;
         padding: 8px 15px;
         border-right: 0.5px solid #B9B9BB;
         font-family: 'Switzer';
@@ -175,7 +122,7 @@
     }
 
     .emptyArea{
-        width: 7rem;
+        width: 5rem;
         border-bottom: 1px solid #B9B9BB;
         border-right: 1px solid #B9B9BB;
     }
@@ -185,7 +132,13 @@
         border-bottom: 1px solid #B9B9BB;
     }
 
-    .content h2{
+
+    /* content styling in style.css */
+    .heading{
+        background: rebeccapurple !important;
+    }
+
+    .content .heading{
         font-family: 'Source Code Pro';
         font-size: 14px;
         padding: 5px 15px;
@@ -193,19 +146,19 @@
         color: #5B5B5C;
     }
 
-    .content h2 .highlight{
+    .content .heading .highlight{
         background: linear-gradient(97deg, #C0F2FF 0%, #E3FEE7 100%);
         color: #000;
         font-weight: 500;
         padding: 0.3rem 0.5rem;
     }
 
-    .content h2 .emphasize{
+    .content .heading .emphasize{
         color: #000;
         font-weight: 500;
     }
     
-    .content h2 .green{
+    .content .heading .green{
         color: #57BF38;
     }
 
